@@ -26,8 +26,8 @@ public class ClienteCorretor {
         this.codCorretor = codCorretor;
     }
 
-    public void exibirRelacao() {
-        System.out.println("Código do Cliente: " + codCliente);
-        System.out.println("Código do Corretor: " + codCorretor);
-    }
+    //public void exibirRelacao() {
+    //    System.out.println("Código do Cliente: " + codCliente);
+    //    System.out.println("Código do Corretor: " + codCorretor);
+    //}
 }
