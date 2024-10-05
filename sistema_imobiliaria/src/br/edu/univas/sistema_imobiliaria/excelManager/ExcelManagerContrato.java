@@ -195,6 +195,7 @@ public class ExcelManagerContrato {
             int cont = 0;
 
             while (rows.hasNext()){
+                // Ignora a linha do cabeçalho
                 if (cont == 0) {rows.next(); cont++; continue;}
 
                 Row row = rows.next();
@@ -215,4 +216,65 @@ public class ExcelManagerContrato {
             System.out.println("Arquivo não existente");
         }
     }
+
+    public static void updateContrato(Contrato contrato, int cod){
+        try{
+            InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
+        
+            XSSFWorkbook workbook = null;
+            
+            try{
+                workbook = new XSSFWorkbook(excelFile);
+            }
+            catch (Exception e){
+                System.out.println("Arquivo não existente ou inválido: " + e.getMessage());
+            }
+
+            XSSFSheet sheet = workbook.getSheet("Contrato");
+
+            Iterator<Row> rows = sheet.rowIterator();
+
+            List<Row> rowsToUpdate = new ArrayList<Row>();
+
+            int cont = 0;
+
+            while (rows.hasNext()){
+                // Ignora a linha do cabeçalho
+                if (cont == 0) {rows.next(); cont++; continue;}
+
+                Row row = rows.next();
+                int rowCod = Integer.parseInt(row.getCell(0).getStringCellValue());
+
+                if(rowCod == cod){
+                    rowsToUpdate.add(row);
+                }
+            }
+
+            for (Row row : rowsToUpdate){
+                row.getCell(1).setCellValue(contrato.getCod());
+                row.getCell(2).setCellValue(contrato.getCodImovel());
+                row.getCell(3).setCellValue(_format.format(contrato.getDataContrato()));
+                row.getCell(4).setCellValue(contrato.getFormaPagamento());
+                row.getCell(5).setCellValue(contrato.getTipo());
+                row.getCell(6).setCellValue(_format.format(contrato.getDataVenda()));
+                row.getCell(7).setCellValue(contrato.getValorVenda());
+                row.getCell(8).setCellValue(_format.format(contrato.getDataEntrada()));
+                row.getCell(9).setCellValue(_format.format(contrato.getDataSaida()));
+                row.getCell(10).setCellValue(contrato.getValorMensalidade());
+            }
+
+            try{
+                FileOutputStream out = new FileOutputStream("imobiliaria.xlsx");
+                workbook.write(out);
+                out.close();
+                workbook.close();
+            }
+            catch (Exception e){
+                System.out.println("Erro para salvar o arquivo: " + e.getMessage());
+            }
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Arquivo não existente");
+        }
+    } 
 }

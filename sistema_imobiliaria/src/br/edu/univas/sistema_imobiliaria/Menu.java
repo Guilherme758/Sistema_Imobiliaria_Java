@@ -52,7 +52,6 @@ public class Menu {
                     break;
             }
         }
-
         scanner.close();
     }
 
@@ -74,22 +73,30 @@ public class Menu {
         int opcao = scanner.nextInt();
         scanner.nextLine();
 
+        int cod = 0;
+
         switch(opcao){
             case 1:
                 ExcelManagerContrato.readContrato();
                 break;
             case 2:
-                Contrato contrato = UserInputHandlerContrato.userInputHandlerContrato(scanner);
+                Contrato contrato = UserInputHandlerContrato.userInputHandlerContrato(scanner, 0, 0);
                 ExcelManagerContrato.insertContrato(contrato);
                 break;
             case 3:
                 System.out.print("Digite o código que deseja deletar (Digite -1 caso queria deletar todos os registros do arquivo): ");
-                int cod = scanner.nextInt();
+                cod = scanner.nextInt();
                 scanner.nextLine();
 
                 ExcelManagerContrato.deleteContrato(cod);
                 break;
             case 4:
+                System.out.print("Digite o código que deseja atualizar: ");
+                cod = scanner.nextInt();
+                scanner.nextLine();
+
+                contrato = UserInputHandlerContrato.userInputHandlerContrato(scanner, 1, cod);
+                ExcelManagerContrato.updateContrato(contrato, cod);
                 break;
             default:
                 System.out.println("Opção inválida");
@@ -103,11 +110,9 @@ public class Menu {
 
     private static void menuCorretor() {
         System.out.println("Menu Corretor:");
-
     }
 
     private static void menuImovel() {
         System.out.println("Menu Imóvel:");
-
     }
 }
