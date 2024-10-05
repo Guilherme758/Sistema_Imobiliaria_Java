@@ -77,7 +77,11 @@ public class Menu {
 
         switch(opcao){
             case 1:
-                ExcelManagerContrato.readContrato();
+                System.out.print("Digite o código que deseja consultar (Digite -1 caso queira consultar todos os registros do arquivo): ");
+                cod = scanner.nextInt();
+                scanner.nextLine();
+                
+                ExcelManagerContrato.readContrato(cod);
                 break;
             case 2:
                 Contrato contrato = UserInputHandlerContrato.userInputHandlerContrato(scanner, 0, 0);

@@ -117,7 +117,21 @@ public class ExcelManagerContrato {
         }
     }
 
-    public static void readContrato(){
+    private static void _genericRead(Row row){
+        System.out.print(row.getCell(0) + " | ");
+        System.out.print(row.getCell(1) + " | ");
+        System.out.print(row.getCell(2) + " | ");
+        System.out.print(row.getCell(3) + " | ");
+        System.out.print(row.getCell(4) + " | ");
+        System.out.print(row.getCell(5) + " | ");
+        System.out.print(row.getCell(6) + " | ");
+        System.out.print(row.getCell(7) + " | ");
+        System.out.print(row.getCell(8) + " | ");
+        System.out.print(row.getCell(9) + " | ");
+        System.out.print(row.getCell(10) + "\n");
+    }
+    
+    public static void readContrato(int cod){
         try{
             InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
         
@@ -136,20 +150,24 @@ public class ExcelManagerContrato {
 
             System.out.println("Imprimindo os dados");
 
+            int cont = 0;
+
             while (rows.hasNext()){
                 Row row = rows.next();
 
-                System.out.print(row.getCell(0) + " | ");
-                System.out.print(row.getCell(1) + " | ");
-                System.out.print(row.getCell(2) + " | ");
-                System.out.print(row.getCell(3) + " | ");
-                System.out.print(row.getCell(4) + " | ");
-                System.out.print(row.getCell(5) + " | ");
-                System.out.print(row.getCell(6) + " | ");
-                System.out.print(row.getCell(7) + " | ");
-                System.out.print(row.getCell(8) + " | ");
-                System.out.print(row.getCell(9) + " | ");
-                System.out.print(row.getCell(10) + "\n");
+                // Printa o cabeçalho
+                if (cont == 0){
+                    _genericRead(row);
+                }
+                // Printa apenas as linhas com o código ou printa todas se o cod for -1
+                else{
+                    int codContrato = Integer.parseInt(row.getCell(0).getStringCellValue());
+
+                    if (codContrato == cod || cod == -1){
+                        _genericRead(row);
+                    }
+                }
+                cont++;
             }
             try{
                 workbook.close();
