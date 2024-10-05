@@ -12,89 +12,96 @@ public class UserInputHandlerContrato {
         int codContrato = 0;
 
         while(true){
-            if (type == 1){codContrato = _cod;}
-            else{
-                System.out.println("Digite o código do contrato: ");
-                codContrato = scanner.nextInt();
+            try{
+                if (type == 1){codContrato = _cod;}
+                else{
+                    System.out.println("Digite o código do contrato: ");
+                    codContrato = scanner.nextInt();
+                    // Limpa o Buffer
+                    scanner.nextLine();
+                }
+
+                System.out.println("Digite o código do cliente: ");
+                int codCliente = scanner.nextInt();
+
                 // Limpa o Buffer
                 scanner.nextLine();
-            }
 
-            System.out.println("Digite o código do cliente: ");
-            int codCliente = scanner.nextInt();
+                System.out.println("Digite o código do Imóvel: ");
+                int codImovel = scanner.nextInt();
 
-            // Limpa o Buffer
-            scanner.nextLine();
+                // Limpa o Buffer
+                scanner.nextLine();
 
-            System.out.println("Digite o código do Imóvel: ");
-            int codImovel = scanner.nextInt();
+                System.out.println("Digite a data do contrato (Padrão yyyy-mm-dd): ");
 
-            // Limpa o Buffer
-            scanner.nextLine();
-
-            System.out.println("Digite a data do contrato (Padrão yyyy-mm-dd): ");
-
-            Date dataContrato = null;
-            try{
-                dataContrato = _format.parse(scanner.nextLine());
-            }
-            catch (ParseException e){
-                System.out.println("O valor inserido não é uma data válida");
-                continue;
-            }
+                Date dataContrato = null;
+                try{
+                    dataContrato = _format.parse(scanner.nextLine());
+                }
+                catch (ParseException e){
+                    System.out.println("O valor inserido não é uma data válida");
+                    continue;
+                }
+                
+                System.out.println("Digite a forma do pagamento: ");
+                String formaPagamento = scanner.nextLine();
             
-            System.out.println("Digite a forma do pagamento: ");
-            String formaPagamento = scanner.nextLine();
-        
-            System.out.println("Digite o tipo do contrato: ");
-            String tipo = scanner.nextLine();
+                System.out.println("Digite o tipo do contrato: ");
+                String tipo = scanner.nextLine();
 
-            System.out.println("Digite a data da venda (Padrão yyyy-mm-dd): ");
+                System.out.println("Digite a data da venda (Padrão yyyy-mm-dd): ");
 
-            Date dataVenda = null;
-            try{
-                dataVenda = _format.parse(scanner.nextLine());
-            }
-            catch (ParseException e){
-                System.out.println("O valor inserido não é uma data válida");
-                continue;
-            }
+                Date dataVenda = null;
+                try{
+                    dataVenda = _format.parse(scanner.nextLine());
+                }
+                catch (ParseException e){
+                    System.out.println("O valor inserido não é uma data válida");
+                    continue;
+                }
+                
+                System.out.println("Digite o valor da venda: ");
+                float valorVenda = scanner.nextFloat();
+
+                // Limpa o Buffer
+                scanner.nextLine();
+
+                System.out.println("Digite a data de entrada (Padrão yyyy-mm-dd): ");
+
+                Date dataEntrada = null;
+                try{
+                    dataEntrada = _format.parse(scanner.nextLine());
+                }
+                catch (ParseException e){
+                    System.out.println("O valor inserido não é uma data válida");
+                    continue;
+                }
             
-            System.out.println("Digite o valor da venda: ");
-            float valorVenda = scanner.nextFloat();
+                System.out.println("Digite a data da saida (Padrão yyyy-mm-dd): ");
 
-            // Limpa o Buffer
-            scanner.nextLine();
+                Date dataSaida = null;
+                try{
+                    dataSaida = _format.parse(scanner.nextLine());
+                }
+                catch (ParseException e){
+                    System.out.println("O valor inserido não é uma data válida");
+                    continue;
+                }
+                
+                System.out.println("Digite o valor da mensalidade: ");
+                float valorMensalidade = scanner.nextFloat();
 
-            System.out.println("Digite a data de entrada (Padrão yyyy-mm-dd): ");
-
-            Date dataEntrada = null;
-            try{
-                dataEntrada = _format.parse(scanner.nextLine());
-            }
-            catch (ParseException e){
-                System.out.println("O valor inserido não é uma data válida");
-                continue;
-            }
-        
-            System.out.println("Digite a data da saida (Padrão yyyy-mm-dd): ");
-
-            Date dataSaida = null;
-            try{
-                dataSaida = _format.parse(scanner.nextLine());
-            }
-            catch (ParseException e){
-                System.out.println("O valor inserido não é uma data válida");
-                continue;
-            }
+                // Limpa o Buffer
+                scanner.nextLine();
             
-            System.out.println("Digite o valor da mensalidade: ");
-            float valorMensalidade = scanner.nextFloat();
-
-            // Limpa o Buffer
-            scanner.nextLine();
-
-            return new Contrato(codContrato, codCliente, codImovel, dataContrato, formaPagamento, tipo, dataVenda, valorVenda, dataEntrada, dataSaida, valorMensalidade);
+                return new Contrato(codContrato, codCliente, codImovel, dataContrato, formaPagamento, tipo, dataVenda, valorVenda, dataEntrada, dataSaida, valorMensalidade);
+            }
+            catch (Exception e){
+                System.out.println("Erro de input" + e.getMessage());
+                scanner.nextLine();
+                continue;
+            }
         }
     }
 }
