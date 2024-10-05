@@ -4,31 +4,31 @@ import java.util.*;
 
 public class Contrato {
     private int cod;
-    private int cod_cliente;
-    private int cod_imovel;
-    private Date data_contrato;
-    private String forma_pagamento;
+    private int codCliente;
+    private int codImovel;
+    private Date dataContrato;
+    private String formaPagamento;
     private String tipo;
-    private Date data_venda;
-    private float valor_venda;
-    private Date data_entrada;
-    private Date data_saida;
-    private float valor_mensalidade;
+    private Date dataVenda;
+    private float valorVenda;
+    private Date dataEntrada;
+    private Date dataSaida;
+    private float valorMensalidade;
 
-    public Contrato(int cod, int cod_cliente, int cod_imovel, Date data_contrato, String forma_pagamento, 
-                    String tipo, Date data_venda, float valor_venda, Date data_entrada, 
-                    Date data_saida, float valor_mensalidade){            
-            this.cod               = cod;  
-            this.cod_cliente       = cod_cliente;
-            this.cod_imovel        = cod_imovel;
-            this.data_contrato     = data_contrato;
-            this.forma_pagamento   = forma_pagamento;
-            this.tipo              = tipo;
-            this.data_venda        = data_venda;
-            this.valor_venda       = valor_venda;
-            this.data_entrada      = data_entrada;
-            this.data_saida        = data_saida;
-            this.valor_mensalidade = valor_mensalidade;
+    public Contrato(int cod, int codCliente, int codImovel, Date dataContrato, String formaPagamento, 
+                    String tipo, Date dataVenda, float valorVenda, Date dataEntrada, 
+                    Date dataSaida, float valorMensalidade){            
+            this.cod              = cod;  
+            this.codCliente       = codCliente;
+            this.codImovel        = codImovel;
+            this.dataContrato     = dataContrato;
+            this.formaPagamento   = formaPagamento;
+            this.tipo             = tipo;
+            this.dataVenda        = dataVenda;
+            this.valorVenda       = valorVenda;
+            this.dataEntrada      = dataEntrada;
+            this.dataSaida        = dataSaida;
+            this.valorMensalidade = valorMensalidade;
     }
 
     public int getCod() {
@@ -40,35 +40,35 @@ public class Contrato {
     }
 
     public int getCodCliente() {
-        return this.cod_cliente;
+        return this.codCliente;
     }
 
-    public void setCodCliente(int cod_cliente) {
-        this.cod_cliente = cod_cliente;
+    public void setCodCliente(int codCliente) {
+        this.codCliente = codCliente;
     }
 
     public int getCodImovel() {
-        return this.cod_imovel;
+        return this.codImovel;
     }
 
-    public void setCodImovel(int cod_imovel) {
-        this.cod_imovel = cod_imovel;
+    public void setCodImovel(int codImovel) {
+        this.codImovel = codImovel;
     }
 
     public Date getDataContrato() {
-        return this.data_contrato;
+        return this.dataContrato;
     }
 
-    public void setDataContrato(Date data_contrato) {
-        this.data_contrato = data_contrato;
+    public void setDataContrato(Date dataContrato) {
+        this.dataContrato = dataContrato;
     }
 
     public String getFormaPagamento() {
-        return this.forma_pagamento;
+        return this.formaPagamento;
     }
 
-    public void setFormaPagamento(String forma_pagamento) {
-        this.forma_pagamento = forma_pagamento;
+    public void setFormaPagamento(String formaPagamento) {
+        this.formaPagamento = formaPagamento;
     }
 
     public String getTipo() {
@@ -80,42 +80,42 @@ public class Contrato {
     }
 
     public Date getDataVenda() {
-        return this.data_venda;
+        return this.dataVenda;
     }
 
-    public void setDataVenda(Date data_venda) {
-        this.data_venda = data_venda;
+    public void setDataVenda(Date dataVenda) {
+        this.dataVenda = dataVenda;
     }
 
     public float getValorVenda() {
-        return this.valor_venda;
+        return this.valorVenda;
     }
 
-    public void setValorVenda(float valor_venda) {
-        this.valor_venda = valor_venda;
+    public void setValorVenda(float valorVenda) {
+        this.valorVenda = valorVenda;
     }
 
     public Date getDataEntrada() {
-        return this.data_entrada;
+        return this.dataEntrada;
     }
 
-    public void setDataEntrada(Date data_entrada) {
-        this.data_entrada = data_entrada;
+    public void setDataEntrada(Date dataEntrada) {
+        this.dataEntrada = dataEntrada;
     }
 
     public Date getDataSaida() {
-        return this.data_saida;
+        return this.dataSaida;
     }
 
-    public void setDataSaida(Date data_saida) {
-        this.data_saida = data_saida;
+    public void setDataSaida(Date dataSaida) {
+        this.dataSaida = dataSaida;
     }
 
     public float getValorMensalidade() {
-        return this.valor_mensalidade;
+        return this.valorMensalidade;
     }
 
-    public void setValorMensalidade(float valor_mensalidade) {
-        this.valor_mensalidade = valor_mensalidade;
+    public void setValorMensalidade(float valorMensalidade) {
+        this.valorMensalidade = valorMensalidade;
     }
 }

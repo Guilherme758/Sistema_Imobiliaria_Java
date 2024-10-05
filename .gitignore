@@ -1,0 +1,5 @@
+.vscode
+.idea
+*.xlsx
+*.xls
+/lib
