@@ -7,16 +7,21 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class UserInputHandlerContrato { 
-    public static Contrato userInputHandlerContrato(){
+    public static Contrato userInputHandlerContrato(Scanner scanner){
         SimpleDateFormat _format = new SimpleDateFormat("yyyy-MM-dd");
-        Scanner scanner = new Scanner(System.in);
 
         while(true){
             System.out.println("Digite o código do cliente: ");
             int codCliente = scanner.nextInt();
 
+            // Limpa o Buffer
+            scanner.nextLine();
+
             System.out.println("Digite o código do Imóvel: ");
             int codImovel = scanner.nextInt();
+
+            // Limpa o Buffer
+            scanner.nextLine();
 
             System.out.println("Digite a data do contrato (Padrão yyyy-mm-dd): ");
 
@@ -49,6 +54,9 @@ public class UserInputHandlerContrato {
             System.out.println("Digite o valor da venda: ");
             float valorVenda = scanner.nextFloat();
 
+            // Limpa o Buffer
+            scanner.nextLine();
+
             System.out.println("Digite a data de entrada (Padrão yyyy-mm-dd): ");
 
             Date dataEntrada = null;
@@ -74,7 +82,8 @@ public class UserInputHandlerContrato {
             System.out.println("Digite o valor da mensalidade: ");
             float valorMensalidade = scanner.nextFloat();
 
-            scanner.close();
+            // Limpa o Buffer
+            scanner.nextLine();
 
             return new Contrato(codImovel, codCliente, codImovel, dataContrato, formaPagamento, tipo, dataVenda, valorVenda, dataEntrada, dataSaida, valorMensalidade);
         }

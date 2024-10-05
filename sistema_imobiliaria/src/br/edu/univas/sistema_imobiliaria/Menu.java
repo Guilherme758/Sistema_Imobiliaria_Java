@@ -2,6 +2,9 @@ package br.edu.univas.sistema_imobiliaria;
 
 import java.util.Scanner;
 
+import br.edu.univas.sistema_imobiliaria.userInputHandler.*;
+import br.edu.univas.sistema_imobiliaria.excelManager.*;
+
 public class Menu {
 
     public static void main(String[] args) {
@@ -29,7 +32,7 @@ public class Menu {
                     menuClienteCorretor();
                     break;
                 case 3:
-                    menuContrato();
+                    menuContrato(scanner);
                     break;
                 case 4:
                     menuProprietario();
@@ -61,8 +64,9 @@ public class Menu {
         System.out.println("Menu Cliente_Corretor:");
     }
 
-    private static void menuContrato() {
-        System.out.println("Menu Contrato:");
+    private static void menuContrato(Scanner scanner) {
+        Contrato contrato = UserInputHandlerContrato.userInputHandlerContrato(scanner);
+        ExcelManagerContrato.insertContrato(contrato);
     }
 
     private static void menuProprietario() {
