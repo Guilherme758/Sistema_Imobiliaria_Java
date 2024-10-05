@@ -83,6 +83,11 @@ public class Menu {
                 ExcelManagerContrato.insertContrato(contrato);
                 break;
             case 3:
+                System.out.print("Digite o código que deseja deletar (Digite -1 caso queria deletar todos os registros do arquivo): ");
+                int cod = scanner.nextInt();
+                scanner.nextLine();
+
+                ExcelManagerContrato.deleteContrato(cod);
                 break;
             case 4:
                 break;
