@@ -101,4 +101,50 @@ public class ExcelManagerContrato {
             System.out.println("Erro para salvar o arquivo: " + e.getMessage());
         }
     }
+
+    public static void readContrato(){
+        try{
+            InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
+        
+            XSSFWorkbook workbook = null;
+            
+            try{
+                workbook = new XSSFWorkbook(excelFile);
+            }
+            catch (Exception e){
+                System.out.println("Arquivo não existente ou inválido: " + e.getMessage());
+            }
+
+            XSSFSheet sheet = workbook.getSheet("Contrato");
+
+            Iterator<Row> rows = sheet.rowIterator();
+
+            System.out.println("Imprimindo os dados");
+
+            while (rows.hasNext()){
+                Row row = rows.next();
+
+                System.out.print(row.getCell(0) + " | ");
+                System.out.print(row.getCell(1) + " | ");
+                System.out.print(row.getCell(2) + " | ");
+                System.out.print(row.getCell(3) + " | ");
+                System.out.print(row.getCell(4) + " | ");
+                System.out.print(row.getCell(5) + " | ");
+                System.out.print(row.getCell(6) + " | ");
+                System.out.print(row.getCell(7) + " | ");
+                System.out.print(row.getCell(8) + " | ");
+                System.out.print(row.getCell(9) + " | ");
+                System.out.print(row.getCell(10) + "\n");
+            }
+            try{
+                workbook.close();
+            }
+            catch (Exception e){
+                System.out.println("Erro ao fechar o workbook" + e.getMessage());
+            }
+        }
+        catch (FileNotFoundException e){
+            System.out.println("Arquivo não existente");
+        }
+    }
 }

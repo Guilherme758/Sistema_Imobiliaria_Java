@@ -65,8 +65,31 @@ public class Menu {
     }
 
     private static void menuContrato(Scanner scanner) {
-        Contrato contrato = UserInputHandlerContrato.userInputHandlerContrato(scanner);
-        ExcelManagerContrato.insertContrato(contrato);
+        System.out.println("Qual ação deseja realizar: ");
+        System.out.println("1 - Leitura");
+        System.out.println("2 - Inserção");
+        System.out.println("3 - Deletar");
+        System.out.println("4 - Atualizar");
+
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+
+        switch(opcao){
+            case 1:
+                ExcelManagerContrato.readContrato();
+                break;
+            case 2:
+                Contrato contrato = UserInputHandlerContrato.userInputHandlerContrato(scanner);
+                ExcelManagerContrato.insertContrato(contrato);
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                System.out.println("Opção inválida");
+                break;
+        }
     }
 
     private static void menuProprietario() {
