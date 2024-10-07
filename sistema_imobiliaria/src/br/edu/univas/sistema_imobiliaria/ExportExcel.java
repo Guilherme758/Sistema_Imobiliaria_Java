@@ -24,6 +24,7 @@ public class ExportExcel {
         corretores.add(new Corretor(1, "111.222.333-44", "Corretor 1", 31912345678L));
         proprietarios.add(new Proprietario(1, "Proprietário 1", 31998765432L, "Pessoa Física", "123.456.789-10", ""));
         imoveis.add(new Imovel(1, 1, 1, "Rua A", "Centro", "123", "Apto 1", "12345-678", "São Paulo", "SP", "Apartamento", 70));
+        clientes.add(new Cliente(2, "guizao", 87439534859L, "Pessoa Física", "123.345.546-42",""));
 
         // Criar a planilha no Excel
         Workbook workbook = new XSSFWorkbook();
@@ -42,12 +43,12 @@ public class ExportExcel {
             e.printStackTrace();
         }
 
-        // Fechar o workbook
-        try {
-            workbook.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // Fecha o workbook
+//        try {
+//            workbook.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     private static void exportClientes(Workbook workbook, List<Cliente> clientes) {
