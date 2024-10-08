@@ -23,10 +23,7 @@ public class UserInputHandlerProprietario {
                 }
 
                 System.out.println("Digite o nome do Proprietário: ");
-                String nomeProprietario = scanner.next();
-
-                // Limpa o Buffer
-                scanner.nextLine();
+                String nomeProprietario = scanner.nextLine();
 
                 System.out.println("Digite o telefone do Proprietário: ");
                 long telefoneProprietario = scanner.nextLong();
@@ -37,13 +34,15 @@ public class UserInputHandlerProprietario {
                 System.out.println("Digite o tipo de Proprietário: ");
                 System.out.println("Fisica");
                 System.out.println("Jurídica");
-                String tipoProprietario = scanner.next();
+                String tipoProprietario = scanner.nextLine();
 
                 System.out.println("Digite o CPF: ");
                 String cpfProprietario = scanner.nextLine();
 
+
                 System.out.println("Digite o CNPJ(Caso Exista): ");
                 String cnpjProprietario = scanner.nextLine();
+
 
                 return new Proprietario(codProprietario, nomeProprietario, telefoneProprietario, tipoProprietario, cpfProprietario, cnpjProprietario);
             }

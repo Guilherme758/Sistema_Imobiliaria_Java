@@ -51,7 +51,7 @@ public class ExcelManagerProprietario {
 
     private static void _genericInsert(Proprietario Proprietario, int type, int rowNum, XSSFWorkbook workbook, XSSFSheet sheet, List<Row> rowsToInsert){
         Map<String, Object[]> data = new TreeMap<String, Object[]>();
-        data.put("1", new Object[] {"cod", "nome", "telefone", "tipo", "cpf", "cnpj"});
+        data.put("1", new Object[] {"cod", "nome", "tipo", "telefone", "cpf", "cnpj"});
 
         if (type == 1){
             data.put("2", new Object[] {
