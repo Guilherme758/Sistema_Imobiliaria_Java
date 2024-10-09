@@ -116,7 +116,45 @@ public class Menu {
         System.out.println("Menu Corretor:");
     }
 
-    private static void menuImovel() {
-        System.out.println("Menu Imóvel:");
-    }
+    private static void menuImovel(Scanner scanner) {
+        System.out.println("Qual ação deseja realizar: ");
+        System.out.println("1 - Leitura");
+        System.out.println("2 - Inserção");
+        System.out.println("3 - Deletar");
+        System.out.println("4 - Atualizar");
+        
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+        
+        int cod = 0;
+        
+        switch(opcao){
+        case 1:
+        System.out.print("Digite o código que deseja consultar (Digite -1 caso queira consultar todos os registros do arquivo): ");
+        cod = scanner.nextInt();
+        scanner.nextLine();
+        ExcelManagerImovel.readImovel(cod);
+        break;
+        case 2:
+        Imovel imovel = UserInputHandlerImovel.userInputHandlerImovel(scanner, 0, 0);
+        ExcelManagerImovel.insertImovel(imovel);
+        break;
+        case 3:
+        System.out.print("Digite o código que deseja deletar (Digite -1 caso queria deletar todos os registros do arquivo): ");
+        cod = scanner.nextInt();
+        scanner.nextLine();
+        ExcelManagerImovel.deleteImovel(cod);
+        break;
+        case 4:
+        System.out.print("Digite o código que deseja atualizar: ");
+        cod = scanner.nextInt();
+        scanner.nextLine();
+        imovel = UserInputHandlerImovel.userInputHandlerImovel(scanner, 1, cod);
+        ExcelManagerImovel.updateImovel(imovel, cod);
+        break;
+        default:
+        System.out.println("Opção inválida");
+        break;
+        }
+        }
 }
