@@ -17,12 +17,7 @@ public class Cliente {
         this.numCPF = numCPF;
         this.numCNPJ = numCNPJ;
     }
-
-<<<<<<< HEAD
     //getter setters
-=======
-    // Getters
->>>>>>> main
     public int getCod() {
         return cod;
     }
