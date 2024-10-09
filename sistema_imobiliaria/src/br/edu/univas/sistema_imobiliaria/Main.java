@@ -5,7 +5,6 @@ public class  Main {
         System.out.println("Exportando os dados");
 
         //exporta para o Excel
-        ExportExcel.exportDataToExcel();
         System.out.println("Exportacao concluida!");
     }
 }

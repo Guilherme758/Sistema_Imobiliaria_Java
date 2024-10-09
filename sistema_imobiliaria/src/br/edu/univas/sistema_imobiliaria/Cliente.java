@@ -2,56 +2,48 @@ package br.edu.univas.sistema_imobiliaria;
 
 public class Cliente {
     private int cod;
-    private String nome;
-    private long telefone;
-    private String tipo;
-    private String cpf;
-    private String cnpj;
+    private String nomeCliente;
+    private Long numTelefone;
+    private String tipoCliente;
+    private String numCPF;
+    private String numCNPJ;
 
-    public Cliente(int cod, String nome, long telefone, String tipo, String cpf, String cnpj) {
+    // Construtor
+    public Cliente(int cod, String nomeCliente, long numTelefone, String tipoCliente, String numCPF, String numCNPJ) {
         this.cod = cod;
-        this.nome = nome;
-        this.telefone = telefone;
-        this.tipo = tipo;
-        this.cpf = cpf;
-        this.cnpj = cnpj;
+        this.nomeCliente = nomeCliente;
+        this.numTelefone = numTelefone;
+        this.tipoCliente = tipoCliente;
+        this.numCPF = numCPF;
+        this.numCNPJ = numCNPJ;
     }
 
+<<<<<<< HEAD
     //getter setters
+=======
+    // Getters
+>>>>>>> main
     public int getCod() {
         return cod;
     }
-    public void setCod(int cod) {
-        this.cod = cod;
+
+    public String getNomeCliente() {
+        return nomeCliente;
     }
-    public String getNome() {
-        return nome;
+
+    public Long getNumTelefone() {
+        return numTelefone;
     }
-    public void setNome(String nome) {
-        this.nome = nome;
+
+    public String getTipoCliente() {
+        return tipoCliente;
     }
-    public long getTelefone() {
-        return telefone;
+
+    public String getNumCPF() {
+        return numCPF;
     }
-    public void setTelefone(long telefone) {
-        this.telefone = telefone;
-    }
-    public String getTipo() {
-        return tipo;
-    }
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-    public String getCpf() {
-        return cpf;
-    }
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-    public String getCnpj() {
-        return cnpj;
-    }
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+
+    public String getNumCNPJ() {
+        return numCNPJ;
     }
 }

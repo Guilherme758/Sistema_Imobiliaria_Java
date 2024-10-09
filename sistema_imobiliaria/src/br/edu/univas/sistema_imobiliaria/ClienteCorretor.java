@@ -25,9 +25,4 @@ public class ClienteCorretor {
     public void setCodCorretor(int codCorretor) {
         this.codCorretor = codCorretor;
     }
-
-    //public void exibirRelacao() {
-    //    System.out.println("Código do Cliente: " + codCliente);
-    //    System.out.println("Código do Corretor: " + codCorretor);
-    //}
 }
