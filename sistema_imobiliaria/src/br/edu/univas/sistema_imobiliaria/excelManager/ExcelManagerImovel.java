@@ -2,6 +2,7 @@ package br.edu.univas.sistema_imobiliaria.excelManager;
 
 import br.edu.univas.sistema_imobiliaria.Imovel;
 import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;

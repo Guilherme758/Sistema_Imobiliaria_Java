@@ -2,12 +2,8 @@ package br.edu.univas.sistema_imobiliaria;
 
 import java.util.Scanner;
 
-import br.edu.univas.sistema_imobiliaria.excelManager.ExcelManagerCliente;
-import br.edu.univas.sistema_imobiliaria.excelManager.ExcelManagerClienteCorretor;
-import br.edu.univas.sistema_imobiliaria.excelManager.ExcelManagerContrato;
-import br.edu.univas.sistema_imobiliaria.userInputHandler.UserInputHandlerCliente;
-import br.edu.univas.sistema_imobiliaria.userInputHandler.UserInputHandlerClienteCorretor;
-import br.edu.univas.sistema_imobiliaria.userInputHandler.UserInputHandlerContrato;
+import br.edu.univas.sistema_imobiliaria.excelManager.*;
+import br.edu.univas.sistema_imobiliaria.userInputHandler.*;
 
 public class Menu {
 
@@ -45,7 +41,7 @@ public class Menu {
                     menuCorretor();
                     break;
                 case 6:
-                    menuImovel();
+                    menuImovel(scanner);
                     break;
                 case 0:
                     continuar = false;
