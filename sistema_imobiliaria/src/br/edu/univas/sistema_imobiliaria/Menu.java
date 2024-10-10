@@ -38,7 +38,7 @@ public class Menu {
                     menuProprietario(scanner);
                     break;
                 case 5:
-                    menuCorretor();
+                    menuCorretor(scanner);
                     break;
                 case 6:
                     menuImovel(scanner);
@@ -237,8 +237,49 @@ public class Menu {
 
     }
 
-    private static void menuCorretor() {
-        System.out.println("Menu Corretor:");
+    private static void menuCorretor(Scanner scanner) {
+        System.out.println("Qual ação deseja realizar: ");
+        System.out.println("1 - Leitura");
+        System.out.println("2 - Inserção");
+        System.out.println("3 - Deletar");
+        System.out.println("4 - Atualizar");
+
+        int opcao = scanner.nextInt();
+        scanner.nextLine();
+
+        int cod = 0;
+
+        switch(opcao){
+            case 1:
+                System.out.print("Digite o código que deseja consultar (Digite -1 caso queira consultar todos os registros do arquivo): ");
+                cod = scanner.nextInt();
+                scanner.nextLine();
+                
+                ExcelManagerCorretor.readCorretor(cod);
+                break;
+            case 2:
+                Corretor corretor = UserInputHandlerCorretor.userInputHandlerCorretor(scanner, 0, 0);
+                ExcelManagerCorretor.insertCorretor(corretor);
+                break;
+            case 3:
+                System.out.print("Digite o código que deseja deletar (Digite -1 caso queria deletar todos os registros do arquivo): ");
+                cod = scanner.nextInt();
+                scanner.nextLine();
+
+                ExcelManagerCorretor.deleteCorretor(cod);
+                break;
+            case 4:
+                System.out.print("Digite o código que deseja atualizar: ");
+                cod = scanner.nextInt();
+                scanner.nextLine();
+
+                corretor = UserInputHandlerCorretor.userInputHandlerCorretor(scanner, 1, cod);
+                ExcelManagerCorretor.updateCorretor(corretor, cod);
+                break;
+            default:
+                System.out.println("Opção inválida");
+                break;
+        }
     }
 
     private static void menuImovel(Scanner scanner) {
