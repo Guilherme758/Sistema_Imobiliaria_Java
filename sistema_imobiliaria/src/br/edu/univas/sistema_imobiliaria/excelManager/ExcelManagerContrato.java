@@ -13,39 +13,44 @@ public class ExcelManagerContrato {
     static SimpleDateFormat _format = new SimpleDateFormat("dd/MM/yyyy");
 
     public static void insertContrato(Contrato contrato){
+        XSSFWorkbook workbook = null;
+        XSSFSheet sheet = null;
+
         try{
+            // Tenta abrir o arquivo Excel existente
             InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
-        
-            XSSFWorkbook workbook = null;
-            
+
             try{
                 workbook = new XSSFWorkbook(excelFile);
             }
             catch (Exception e){
-                System.out.println("Arquivo não existente ou inválido: " + e.getMessage());
+                System.out.println("Arquivo existente, mas inválido: " + e.getMessage());
             }
 
-            XSSFSheet sheet = workbook.getSheet("Contrato");
+            // Tenta obter a planilha "Contrato"
+            sheet = workbook.getSheet("Contrato");
 
-            int rowNum = sheet.getLastRowNum();
-
-            if(rowNum == -1){
-                System.out.println("Arquivo sem dados, inserindo cabeçalho e novo contrato");
-                _genericInsert(contrato, 1, 0, workbook, sheet, null);
-            }
-            else{
-                System.out.println("Adicionando novos dados ao arquivo");
-                _genericInsert(contrato, 0, rowNum + 1, workbook, sheet, null);
+            if (sheet == null) {
+                // Se a planilha não existir, crie uma nova
+                System.out.println("Planilha 'Contrato' não existente, criando nova planilha");
+                sheet = workbook.createSheet("Contrato");
             }
         }
         catch (FileNotFoundException e){
+            // Se o arquivo não existir, crie um novo workbook e planilha
             System.out.println("Criando arquivo do zero");
+            workbook = new XSSFWorkbook();
+            sheet = workbook.createSheet("Contrato");
+        }
 
-            XSSFWorkbook workbook = new XSSFWorkbook();
+        int rowNum = sheet.getLastRowNum();
 
-            XSSFSheet sheet = workbook.createSheet("Contrato");
-
+        if(rowNum == -1){
+            System.out.println("Arquivo sem dados, inserindo cabeçalho e novo contrato");
             _genericInsert(contrato, 1, 0, workbook, sheet, null);
+        } else {
+            System.out.println("Adicionando novos dados ao arquivo");
+            _genericInsert(contrato, 0, rowNum + 1, workbook, sheet, null);
         }
     }
 
