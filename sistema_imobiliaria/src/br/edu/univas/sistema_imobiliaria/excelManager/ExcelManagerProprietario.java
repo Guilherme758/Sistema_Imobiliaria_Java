@@ -9,81 +9,72 @@ import java.io.*;
 import org.apache.poi.xssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
 
-public class ExcelManagerContrato {    
+public class ExcelManagerProprietario {
     static SimpleDateFormat _format = new SimpleDateFormat("dd/MM/yyyy");
 
-    public static void insertContrato(Contrato contrato){
-        XSSFWorkbook workbook = null;
-        XSSFSheet sheet = null;
-
+    public static void insertProprietario(Proprietario Proprietario){
         try{
-            // Tenta abrir o arquivo Excel existente
             InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
+
+            XSSFWorkbook workbook = null;
 
             try{
                 workbook = new XSSFWorkbook(excelFile);
             }
             catch (Exception e){
-                System.out.println("Arquivo existente, mas inválido: " + e.getMessage());
+                System.out.println("Arquivo não existente ou inválido: " + e.getMessage());
             }
 
-            // Tenta obter a planilha "Contrato"
-            sheet = workbook.getSheet("Contrato");
+            XSSFSheet sheet = workbook.getSheet("Proprietario");
 
-            if (sheet == null) {
-                // Se a planilha não existir, crie uma nova
-                System.out.println("Planilha 'Contrato' não existente, criando nova planilha");
-                sheet = workbook.createSheet("Contrato");
+            int rowNum = sheet.getLastRowNum();
+
+            if(rowNum == -1){
+                System.out.println("Arquivo sem dados, inserindo cabeçalho e novo Proprietario");
+                _genericInsert(Proprietario, 1, 0, workbook, sheet, null);
+            }
+            else{
+                System.out.println("Adicionando novos dados ao arquivo");
+                _genericInsert(Proprietario, 0, rowNum + 1, workbook, sheet, null);
             }
         }
         catch (FileNotFoundException e){
-            // Se o arquivo não existir, crie um novo workbook e planilha
             System.out.println("Criando arquivo do zero");
-            workbook = new XSSFWorkbook();
-            sheet = workbook.createSheet("Contrato");
-        }
 
-        int rowNum = sheet.getLastRowNum();
+            XSSFWorkbook workbook = new XSSFWorkbook();
 
-        if(rowNum == -1){
-            System.out.println("Arquivo sem dados, inserindo cabeçalho e novo contrato");
-            _genericInsert(contrato, 1, 0, workbook, sheet, null);
-        } else {
-            System.out.println("Adicionando novos dados ao arquivo");
-            _genericInsert(contrato, 0, rowNum + 1, workbook, sheet, null);
+            XSSFSheet sheet = workbook.createSheet("Proprietario");
+
+            _genericInsert(Proprietario, 1, 0, workbook, sheet, null);
         }
     }
 
-    private static void _genericInsert(Contrato contrato, int type, int rowNum, XSSFWorkbook workbook, XSSFSheet sheet, List<Row> rowsToInsert){
+    private static void _genericInsert(Proprietario Proprietario, int type, int rowNum, XSSFWorkbook workbook, XSSFSheet sheet, List<Row> rowsToInsert){
         Map<String, Object[]> data = new TreeMap<String, Object[]>();
-        data.put("1", new Object[] {"cod", "cod_cliente", "cod_imovel", "data_contrato", "forma_pagamento", "tipo", 
-                                        "data_venda", "valor_venda", "data_entrada", "data_saida", "valor_mensalidade"});
-        
+        data.put("1", new Object[] {"cod", "nome", "tipo", "telefone", "cpf", "cnpj"});
+
         if (type == 1){
-            data.put("2", new Object[] {contrato.getCod(), contrato.getCodCliente(), contrato.getCodImovel(),
-                                    contrato.getDataContrato(), contrato.getFormaPagamento(),
-                                    contrato.getTipo(), contrato.getDataVenda(), contrato.getValorVenda(),
-                                    contrato.getDataEntrada(), contrato.getDataSaida(), contrato.getValorMensalidade()});
+            data.put("2", new Object[] {
+                    Proprietario.getCod(), Proprietario.getNome(),
+                    Proprietario.getTipo(), Proprietario.getTelefone(),
+                    Proprietario.getCpf(), Proprietario.getCnpj()});
         }
         else if (type == 0){
             data = new TreeMap<String, Object[]>();
 
-            data.put(String.valueOf(rowNum), new Object[] {contrato.getCod(), contrato.getCodCliente(), contrato.getCodImovel(),
-                contrato.getDataContrato(), contrato.getFormaPagamento(),
-                contrato.getTipo(), contrato.getDataVenda(), contrato.getValorVenda(),
-                contrato.getDataEntrada(), contrato.getDataSaida(), contrato.getValorMensalidade()});                          
+            data.put(String.valueOf(rowNum), new Object[] {
+                    Proprietario.getCod(), Proprietario.getNome(),
+                    Proprietario.getTipo(), Proprietario.getTelefone(),
+                    Proprietario.getCpf(), Proprietario.getCnpj()});
         }
 
         else if (type == 2){
-            int cont = 2; 
+            int cont = 2;
 
             for (Row row : rowsToInsert){
                 data.put(String.valueOf(cont), new Object[] {row.getCell(0).getStringCellValue(), row.getCell(1).getStringCellValue(),
-                                                             row.getCell(2).getStringCellValue(), row.getCell(3).getStringCellValue(), 
-                                                             row.getCell(4).getStringCellValue(), row.getCell(5).getStringCellValue(), 
-                                                             row.getCell(6).getStringCellValue(), row.getCell(7).getStringCellValue(), 
-                                                             row.getCell(8).getStringCellValue(), row.getCell(9).getStringCellValue(), 
-                                                             row.getCell(10).getStringCellValue()});
+                        row.getCell(2).getStringCellValue(), row.getCell(3).getStringCellValue(),
+                        row.getCell(4).getStringCellValue(), row.getCell(5).getStringCellValue()});
                 cont++;
             }
         }
@@ -128,20 +119,15 @@ public class ExcelManagerContrato {
         System.out.print(row.getCell(2) + " | ");
         System.out.print(row.getCell(3) + " | ");
         System.out.print(row.getCell(4) + " | ");
-        System.out.print(row.getCell(5) + " | ");
-        System.out.print(row.getCell(6) + " | ");
-        System.out.print(row.getCell(7) + " | ");
-        System.out.print(row.getCell(8) + " | ");
-        System.out.print(row.getCell(9) + " | ");
-        System.out.print(row.getCell(10) + "\n");
+        System.out.print(row.getCell(5) + "\n");
     }
-    
-    public static void readContrato(int cod){
+
+    public static void readProprietario(int cod){
         try{
             InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
-        
+
             XSSFWorkbook workbook = null;
-            
+
             try{
                 workbook = new XSSFWorkbook(excelFile);
             }
@@ -149,7 +135,7 @@ public class ExcelManagerContrato {
                 System.out.println("Arquivo não existente ou inválido: " + e.getMessage());
             }
 
-            XSSFSheet sheet = workbook.getSheet("Contrato");
+            XSSFSheet sheet = workbook.getSheet("Proprietario");
 
             Iterator<Row> rows = sheet.rowIterator();
 
@@ -166,9 +152,9 @@ public class ExcelManagerContrato {
                 }
                 // Printa apenas as linhas com o código ou printa todas se o cod for -1
                 else{
-                    int codContrato = Integer.parseInt(row.getCell(0).getStringCellValue());
+                    int codProprietario = Integer.parseInt(row.getCell(0).getStringCellValue());
 
-                    if (codContrato == cod || cod == -1){
+                    if (codProprietario == cod || cod == -1){
                         _genericRead(row);
                     }
                 }
@@ -186,12 +172,12 @@ public class ExcelManagerContrato {
         }
     }
 
-    public static void deleteContrato(int cod){
+    public static void deleteProprietario(int cod){
         try{
             InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
-        
+
             XSSFWorkbook workbook = null;
-            
+
             try{
                 workbook = new XSSFWorkbook(excelFile);
             }
@@ -200,16 +186,16 @@ public class ExcelManagerContrato {
             }
 
             if (cod == -1){
-                workbook.removeSheetAt(workbook.getSheetIndex("Contrato"));
+                workbook.removeSheetAt(workbook.getSheetIndex("Proprietario"));
 
-                XSSFSheet sheet = workbook.createSheet("Contrato");
+                XSSFSheet sheet = workbook.createSheet("Proprietario");
 
                 _genericInsert(null, 3, 0, workbook, sheet, null);
 
                 return;
             }
 
-            XSSFSheet sheet = workbook.getSheet("Contrato");
+            XSSFSheet sheet = workbook.getSheet("Proprietario");
 
             Iterator<Row> rows = sheet.rowIterator();
 
@@ -229,9 +215,9 @@ public class ExcelManagerContrato {
                 }
             }
 
-            workbook.removeSheetAt(workbook.getSheetIndex("Contrato"));
+            workbook.removeSheetAt(workbook.getSheetIndex("Proprietario"));
 
-            sheet = workbook.createSheet("Contrato");
+            sheet = workbook.createSheet("Proprietario");
 
             _genericInsert(null, 2, 0, workbook, sheet, rowsToInsert);
         }
@@ -240,12 +226,12 @@ public class ExcelManagerContrato {
         }
     }
 
-    public static void updateContrato(Contrato contrato, int cod){
+    public static void updateProprietario(Proprietario Proprietario, int cod){
         try{
             InputStream excelFile = new FileInputStream("imobiliaria.xlsx");
-        
+
             XSSFWorkbook workbook = null;
-            
+
             try{
                 workbook = new XSSFWorkbook(excelFile);
             }
@@ -253,7 +239,7 @@ public class ExcelManagerContrato {
                 System.out.println("Arquivo não existente ou inválido: " + e.getMessage());
             }
 
-            XSSFSheet sheet = workbook.getSheet("Contrato");
+            XSSFSheet sheet = workbook.getSheet("Proprietario");
 
             Iterator<Row> rows = sheet.rowIterator();
 
@@ -274,16 +260,12 @@ public class ExcelManagerContrato {
             }
 
             for (Row row : rowsToUpdate){
-                row.getCell(1).setCellValue(contrato.getCod());
-                row.getCell(2).setCellValue(contrato.getCodImovel());
-                row.getCell(3).setCellValue(_format.format(contrato.getDataContrato()));
-                row.getCell(4).setCellValue(contrato.getFormaPagamento());
-                row.getCell(5).setCellValue(contrato.getTipo());
-                row.getCell(6).setCellValue(_format.format(contrato.getDataVenda()));
-                row.getCell(7).setCellValue(contrato.getValorVenda());
-                row.getCell(8).setCellValue(_format.format(contrato.getDataEntrada()));
-                row.getCell(9).setCellValue(_format.format(contrato.getDataSaida()));
-                row.getCell(10).setCellValue(contrato.getValorMensalidade());
+                row.getCell(1).setCellValue(Proprietario.getCod());
+                row.getCell(2).setCellValue(Proprietario.getNome());
+                row.getCell(3).setCellValue(_format.format(Proprietario.getTelefone()));
+                row.getCell(4).setCellValue(Proprietario.getTipo());
+                row.getCell(5).setCellValue(Proprietario.getCpf());
+                row.getCell(6).setCellValue(_format.format(Proprietario.getCnpj()));
             }
 
             try{
@@ -299,5 +281,5 @@ public class ExcelManagerContrato {
         catch (FileNotFoundException e){
             System.out.println("Arquivo não existente");
         }
-    } 
+    }
 }
