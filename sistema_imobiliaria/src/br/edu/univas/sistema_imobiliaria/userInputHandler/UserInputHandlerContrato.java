@@ -95,7 +95,7 @@ public class UserInputHandlerContrato {
                 // Limpa o Buffer
                 scanner.nextLine();
             
-                return new Contrato(codContrato, codCliente, codImovel, dataContrato, formaPagamento, tipo, dataVenda, valorVenda, dataEntrada, dataSaida, valorMensalidade);
+                    return new Contrato(codContrato, codCliente, codImovel, dataContrato, formaPagamento, tipo, dataVenda, valorVenda, dataEntrada, dataSaida, valorMensalidade);
             }
             catch (Exception e){
                 System.out.println("Erro de input" + e.getMessage());
